@@ -23,6 +23,7 @@ const visuallyHiddenCSS = "border: 0; clip: rect(0 0 0 0); height: 1px; margin: 
 
 export default class BackgroundPicture {
   constructor(el, opts) {
+
     // Do nothing if `object-fit` is supported
     if (supportsObjectFit) {
       return false;
@@ -69,22 +70,17 @@ export default class BackgroundPicture {
 
     // Bind to onload event, which will fire whenever the source changes
     this.img.onload = function() {
-      self.update("onload");
+      self.update("img onload");
     };
 
     // Update if “onload” event fired before this script was parsed
-    // (we know this happened if “currentSrc” has already been set)
-    if (this.supportsCurrentSrc && this.img.currentSrc.length) {
-      this.update("init");
-    } else if (this.img.src.length) {
-      this.update("old browser init");
-    }
+    this.update("init");
   }
 
   // Update parent wrapper
   update(msg) {
     // console.log(msg, {currentSrc: `${this.img.currentSrc}`, src: `${this.img.src}`});
-    var source = this.supportsCurrentSrc ? this.img.currentSrc : this.img.src;
+    var source = this.supportsCurrentSrc && this.img.currentSrc.length ? this.img.currentSrc : this.img.src;
 
     if (!source.length) {
       this.el.style.backgroundImage = "";
