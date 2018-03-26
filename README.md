@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/Threespot/object-fit-image.svg?branch=master)](https://travis-ci.org/Threespot/object-fit-image)
 [![Coverage Status](https://coveralls.io/repos/github/Threespot/object-fit-image/badge.svg)](https://coveralls.io/github/Threespot/object-fit-image)
 
-Polyfills `object-fit: cover` on `<img>` or `<picture>` tags by applying the `src` as an inline “background-image” on a target wrapper. Required for IE 11- and Android 4.4-.
+Polyfills `object-fit: cover` on `<img>` or `<picture>` tags by applying the `src` as an inline “background-image” on a target wrapper. Required for IE 11- and Android 4.4-. We recommend using [Picturefill](https://scottjehl.github.io/picturefill) to polyfill the `<picture>` element itself.
 
 ## Install
 
@@ -13,6 +13,13 @@ yarn add @threespot/object-fit-image
 ```
 
 ## Usage
+
+**Markup**
+```html
+  <div class="bg-image">
+    <img class="bg-image-source" src="https://satyr.io/320x16:9" srcset="https://satyr.io/320x16:9 320w, https://satyr.io/640x16:9 640w" alt="Image description.">
+  </div>
+```
 
 ```js
 import ObjectFitImage from "@threespot/object-fit-image";
@@ -44,6 +51,25 @@ Example styles for browsers that support `object-fit`:
       width: 100%;
     }
   }
+```
+
+**Additional markup examples**
+```html
+  <!-- Picture tag -->
+  <picture class="bg-image">
+    <source srcset="https://satyr.io/768x16:9/3" media="(min-width: 768px)">
+    <source srcset="https://satyr.io/480x16:9/2" media="(min-width: 480px)">
+    <img class="bg-image-source" src="https://satyr.io/320x16:9/1" alt="Image description 2 test.">
+  </picture>
+
+  <!-- Picture tag with wrapper -->
+  <div class="bg-image">
+    <picture class="bg-image-source">
+      <source srcset="https://satyr.io/768x16:9/3" media="(min-width: 768px)">
+      <source srcset="https://satyr.io/480x16:9/2" media="(min-width: 480px)">
+      <img src="https://satyr.io/320x16:9/1" alt="Image description 1 test.">
+    </picture>
+  </div>
 ```
 
 ## License
