@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>index.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#supportsObjectFit">supportsObjectFit</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">index.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------
+"use strict";
+
+/**
+ * Polyfill “object-fit” (IE 11-, aOS 4.4-) by applying &lt;img>/&lt;picture> src as “background-image” on target wrapper
+ * @param {HTMLElement} el - Image wrapper element
+ * @param {Object} opts - Options
+ * @param {string|boolean} [opts.visuallyHiddenClass=false] - Class to add to the image to visually hide it (defaults to using inline styles)
+ * @param {string} [opts.backgroundPosition="50% 50%"] - Optional background-position coordinates
+ */
+
+// Use CSS.supports() to test for object-fit, since browsers that don’t
+// support it also don’t support object-fit.
+// https://caniuse.com/#feat=css-supports-api
+// https://caniuse.com/#feat=object-fit
+const supportsObjectFit = window.CSS &amp;&amp; CSS.hasOwnProperty('supports');
+
+// Visually hidden CSS
+// https://github.com/h5bp/html5-boilerplate/blob/d6561f2c4792b10c181b62a17e78a064d0a27884/dist/css/main.css#L128-L147
+const visuallyHiddenCSS = "border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap; width: 1px;";
+
+export default class BackgroundPicture {
+  constructor(el, opts) {
+    // Do nothing if `object-fit` is supported
+    if (supportsObjectFit) {
+      return false;
+    }
+
+    // Use Object.assign() to merge “opts” object with default values in this.options
+    this.options = Object.assign(
+      {},
+      {
+        visuallyHiddenClass: false,
+        backgroundPosition: "50% 50%"
+      },
+      opts
+    );
+
+    var self = this;
+    this.el = el;
+    this.img = this.el.querySelector('.bg-image-source');
+
+    if (!this.img) {
+      console.warn("BackgroundPicture: No source image found. Add “bg-image-source” class to target image.");
+      return false;
+    }
+
+    // If target is a &lt;picture> element, get img tag
+    if (this.img.tagName.toLowerCase() !== "img") {
+      this.img = this.img.getElementsByTagName("img")[0];
+
+      if (!this.img) {
+        console.warn("BackgroundPicture: No image tag found in “bg-image-source” element.");
+        return false;
+      }
+    }
+
+    // Visually hide the img tag to keep alt text accessible (as opposed to “display: none”)
+    if (this.options.visuallyHiddenClass &amp;&amp; this.options.visuallyHiddenClass.length) {
+      this.img.classList.add(this.options.visuallyHiddenClass);
+    } else {
+      this.img.setAttribute("style", visuallyHiddenCSS);
+    }
+
+    // Check if “currentSrc” is supported
+    this.supportsCurrentSrc = typeof this.img.currentSrc !== "undefined";
+
+    // Bind to onload event, which will fire whenever the source changes
+    this.img.onload = function() {
+      self.update("onload");
+    };
+
+    // Update if “onload” event fired before this script was parsed
+    // (we know this happened if “currentSrc” has already been set)
+    if (this.supportsCurrentSrc &amp;&amp; this.img.currentSrc.length) {
+      this.update("init");
+    } else if (this.img.src.length) {
+      this.update("old browser init");
+    }
+  }
+
+  // Update parent wrapper
+  update(msg) {
+    // console.log(msg, {currentSrc: `${this.img.currentSrc}`, src: `${this.img.src}`});
+    var source = this.supportsCurrentSrc ? this.img.currentSrc : this.img.src;
+
+    if (!source.length) {
+      this.el.style.backgroundImage = "";
+    } else {
+      this.el.setAttribute("style", `background-image: url('${source}'); background-size: cover; background-position: ${this.options.backgroundPosition}; display: block;`);
+    }
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Mar 25 2018 23:51:57 GMT-0400 (EDT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
