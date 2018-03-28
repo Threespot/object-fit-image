@@ -1,6 +1,6 @@
 {
   "name": "@threespot/object-fit-image",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Make iframes responsive",
   "main": "index.js",
   "homepage": "https://threespot.github.io/object-fit-image/",
