@@ -1,4 +1,4 @@
-# Fluid Iframe
+# `object-fit` Image Polyfill
 
 [![npm](https://badge.fury.io/js/%40threespot%2Fobject-fit-image.svg)](https://www.npmjs.com/package/@threespot/object-fit-image)
 [![Build Status](https://travis-ci.org/Threespot/object-fit-image.svg?branch=master)](https://travis-ci.org/Threespot/object-fit-image)
