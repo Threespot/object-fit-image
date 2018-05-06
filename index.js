@@ -21,7 +21,7 @@ const supportsObjectFit = window.CSS && CSS.hasOwnProperty('supports');
 // https://github.com/h5bp/html5-boilerplate/blob/d6561f2c4792b10c181b62a17e78a064d0a27884/dist/css/main.css#L128-L147
 const visuallyHiddenCSS = "border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap; width: 1px;";
 
-export default class BackgroundPicture {
+export default class ObjectFitImage {
   constructor(el, opts) {
 
     // Do nothing if `object-fit` is supported
@@ -44,7 +44,7 @@ export default class BackgroundPicture {
     this.img = this.el.querySelector('.bg-image-source');
 
     if (!this.img) {
-      console.warn("BackgroundPicture: No source image found. Add “bg-image-source” class to target image.");
+      console.warn("ObjectFitImage: No source image found. Add “bg-image-source” class to target image.");
       return false;
     }
 
@@ -53,7 +53,7 @@ export default class BackgroundPicture {
       this.img = this.img.getElementsByTagName("img")[0];
 
       if (!this.img) {
-        console.warn("BackgroundPicture: No image tag found in “bg-image-source” element.");
+        console.warn("ObjectFitImage: No image tag found in “bg-image-source” element.");
         return false;
       }
     }
