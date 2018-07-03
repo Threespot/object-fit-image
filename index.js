@@ -11,14 +11,10 @@
  * @param {string} [opts.backgroundPosition="50% 50%"] - Optional background-position coordinates
  */
 
-// Use CSS.supports() to test for “object-fit”
-// Note: browsers that don’t support CSS.supports() also don’t support “object-fit”
-// https://caniuse.com/#feat=css-supports-api
+// Detect “object-fit” support
+// Note: Edge 16+ only supports “object-fit” on img tags, but that’s all we’re using it for.
 // https://caniuse.com/#feat=object-fit
-const supportsObjectFit =
-  window.CSS &&
-  "supports" in window.CSS &&
-  window.CSS.supports("object-fit", "cover");
+const supportsObjectFit = "objectFit" in document.documentElement.style;
 
 // Visually hidden CSS
 // https://github.com/h5bp/html5-boilerplate/blob/d6561f2c4792b10c181b62a17e78a064d0a27884/dist/css/main.css#L128-L147
