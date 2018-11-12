@@ -84,7 +84,7 @@ export default class ObjectFitImage {
     if (!source.length) {
       this.el.style.backgroundImage = "";
     } else {
-      this.el.setAttribute("style", `background-image: url('${source}'); background-size: cover; background-position: ${this.options.backgroundPosition}; display: block;`);
+      this.el.setAttribute("style", `background-image: url('${source}'); background-size: cover; background-position: ${this.options.backgroundPosition};`);
     }
   }
 }
