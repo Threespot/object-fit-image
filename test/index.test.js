@@ -15,7 +15,7 @@ test('Basic test', () => {
   new ObjectFitImage(imageWrapper);
 
   expect(minify(document.body.innerHTML)).toBe(minify(`
-    <div class="bg-image" style="background-image: url('https://satyr.io/320x16:9'); background-size: cover; background-position: 50% 50%; display: block;">
+    <div class="bg-image" style="background-image: url('https://satyr.io/320x16:9'); background-size: cover; background-position: 50% 50%;">
       <img class="bg-image-source" src="https://satyr.io/320x16:9" srcset="https://satyr.io/320x16:9 320w, https://satyr.io/640x16:9 640w, https://satyr.io/980x16:9 980w" alt="Image description test." style="border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap; width: 1px;">
     </div>`));
 });
@@ -32,7 +32,7 @@ test('Custom options', () => {
   });
 
   expect(minify(document.body.innerHTML)).toBe(minify(`
-    <div class="bg-image" style="background-image: url('https://satyr.io/320x16:9'); background-size: cover; background-position: 50% 0; display: block;">
+    <div class="bg-image" style="background-image: url('https://satyr.io/320x16:9'); background-size: cover; background-position: 50% 0;">
       <img class="bg-image-source vh" src="https://satyr.io/320x16:9" srcset="https://satyr.io/320x16:9 320w, https://satyr.io/640x16:9 640w, https://satyr.io/980x16:9 980w" alt="Image description test.">
     </div>`));
 });
