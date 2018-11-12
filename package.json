@@ -1,6 +1,6 @@
 {
   "name": "@threespot/object-fit-image",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "object-fit polyfill for images",
   "main": "dist/object-fit-image.m.js",
   "homepage": "https://threespot.github.io/object-fit-image/",
